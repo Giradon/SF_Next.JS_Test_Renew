@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { format } from 'date-fns';
+
 import { cn } from '@/lib/utils';
 import {
     Button,
@@ -10,16 +11,16 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui';
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { CalendarIcon } from '@/public/assets/icons';
 
 interface Props {
     label: string;
     isReadOnly?: boolean;
+    value: Date | undefined;
+    onChange?: (date: Date | undefined) => void;
 }
 
-function LabelDatePicker({ label, isReadOnly }: Props) {
-    const [date, setDate] = useState<Date | undefined>();
-
+function LabelDatePicker({ label, isReadOnly, value, onChange }: Props) {
     return (
         <div className='max-w-64 flex items-center gap-3'>
             <small className='text-sm font-medium leading-none text-[#6D6D6D]'>
@@ -31,13 +32,13 @@ function LabelDatePicker({ label, isReadOnly }: Props) {
                         variant={'outline'}
                         className={cn(
                             'w-[280px] justify-start text-left font-normal',
-                            !date && 'text-muted-foreground'
+                            !value && 'text-muted-foreground'
                         )}
                         disabled={isReadOnly} // "readOnly" 모드일 때 버튼 비활성화
                     >
                         <CalendarIcon className='mr-2 h-4 w-4' />
-                        {date ? (
-                            format(date, 'PPP')
+                        {value ? (
+                            format(value, 'PPP')
                         ) : (
                             <span>날짜를 선택하세요.</span>
                         )}
@@ -47,8 +48,8 @@ function LabelDatePicker({ label, isReadOnly }: Props) {
                     <PopoverContent className='w-auto p-0'>
                         <Calendar
                             mode='single'
-                            selected={date}
-                            onSelect={setDate}
+                            selected={value}
+                            onSelect={onChange}
                             initialFocus
                         />
                     </PopoverContent>

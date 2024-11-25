@@ -1,5 +1,9 @@
 'use client';
 
+import { useParams, useRouter } from 'next/navigation';
+import { toast } from '@/hooks/use-toast';
+import { useDeleteTask } from '@/hooks/api';
+/** UI 컴포넌트 */
 import {
     AlertDialog,
     AlertDialogAction,
@@ -17,6 +21,11 @@ interface Props {
 }
 
 function AlertPopup({ children }: Props) {
+    const { id } = useParams();
+    const router = useRouter();
+
+    const handleDeleteTask = useDeleteTask();
+
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
@@ -33,7 +42,10 @@ function AlertPopup({ children }: Props) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>취소</AlertDialogCancel>
-                    <AlertDialogAction className='bg-red-600 hover:bg-rose-600'>
+                    <AlertDialogAction
+                        onClick={() => handleDeleteTask(Number(id))}
+                        className='bg-red-600 hover:bg-rose-600'
+                    >
                         삭제
                     </AlertDialogAction>
                 </AlertDialogFooter>
