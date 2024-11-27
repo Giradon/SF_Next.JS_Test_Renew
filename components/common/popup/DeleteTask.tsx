@@ -1,7 +1,6 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
-import { toast } from '@/hooks/use-toast';
+import { useParams } from 'next/navigation';
 import { useDeleteTask } from '@/hooks/api';
 /** UI 컴포넌트 */
 import {
@@ -20,10 +19,8 @@ interface Props {
     children: React.ReactNode;
 }
 
-function AlertPopup({ children }: Props) {
+function DeleteTaskPopup({ children }: Props) {
     const { id } = useParams();
-    const router = useRouter();
-
     const handleDeleteTask = useDeleteTask();
 
     return (
@@ -54,4 +51,4 @@ function AlertPopup({ children }: Props) {
     );
 }
 
-export { AlertPopup };
+export { DeleteTaskPopup };
