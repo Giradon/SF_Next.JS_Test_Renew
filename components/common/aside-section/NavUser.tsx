@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from '@/hooks/use-toast';
 /** UI 컴포넌트 */
@@ -25,7 +26,6 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui';
 import { User } from '@/types';
-import { useRouter } from 'next/navigation';
 
 interface Props {
     user: User | null;
@@ -39,9 +39,14 @@ export function NavUser({ user }: Props) {
         try {
             const { error } = await supabase.auth.signOut();
 
+            /** 쿠키 값 삭제(수정에 가까움 = 기간 만료) */
+            document.cookie = 'user= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+            /** 로컬스토리지 및 스토어 초기화 */
+            localStorage.removeItem('user');
+
             toast({
                 title: '로그아웃을 완료하였습니다.',
-                description: 'TASK 관리 앱을 사용해주셔서 감사합니다.',
+                description: 'TASK 관리 앱을 사용해주셔서 감사합니다!',
             });
             router.push('/');
 

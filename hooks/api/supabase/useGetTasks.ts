@@ -6,6 +6,7 @@ import { tasksAtom } from '@/stores/atoms';
 import { supabase } from '@/lib/supabase';
 
 function useGetTasks() {
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
     const [tasks, setTasks] = useAtom(tasksAtom);
 
     /** 하단의 코드에서 Supabase에서 error를 반환함에도 불구하고 try-catch 구문을 사용하는 이유
@@ -17,7 +18,8 @@ function useGetTasks() {
         try {
             const { data, status, error } = await supabase
                 .from('tasks')
-                .select('*');
+                .select('*')
+                .eq('user_id', user?.id);
 
             if (data && status === 200) setTasks(data);
             if (error) {
@@ -40,7 +42,7 @@ function useGetTasks() {
         }
     };
 
-    return { tasks, setTasks, getTasks };
+    return { tasks, getTasks };
 }
 
 export { useGetTasks };
