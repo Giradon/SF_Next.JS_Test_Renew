@@ -123,3 +123,5 @@
 3. 이 모든 기능은 Jotai Store에서 관리하는 userAtom 데이터를 참조
 4. 비밀번호 변경 기능은 Supabase에서 제공되는 updateUser 메서드를 통해 user_metadata를 관리하여 활용
     - 이메일로 발송된 Reset Confirm 메일을 통해 `비밀번호 변경 페이지("/password-setting")` 접근하여 기능 수행
+
+<img width='1120'src='https://github.com/user-attachments/assets/0d98d7ae-720f-48db-a668-bcdff34f94fa'>
