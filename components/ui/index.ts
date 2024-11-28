@@ -20,7 +20,7 @@ export {
     CardDescription,
     CardContent,
 } from './card/card';
-export { Calendar } from './calendar/calendar';
+export { Calendar } from './date-picker/calendar';
 export { Checkbox } from './checkbox/checkbox';
 export {
     Dialog,
