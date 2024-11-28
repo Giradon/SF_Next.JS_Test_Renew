@@ -3,12 +3,13 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useGetTasks, useCreateTask, useSearch } from '@/hooks/api';
-/** UI 컴포넌트 */
-import { Button, SearchBar } from '@/components/ui';
-import { Task } from '@/types';
-import { NavUser } from './NavUser';
 import { useAtomValue } from 'jotai';
 import { userAtom } from '@/stores/atoms';
+/** UI 컴포넌트 */
+import { NavUser } from './NavUser';
+import { Button, SearchBar } from '@/components/ui';
+/** 타입 */
+import { Task } from '@/types';
 
 function AsideSection() {
     const router = useRouter();
@@ -16,7 +17,7 @@ function AsideSection() {
     const { tasks, getTasks } = useGetTasks();
     const { search } = useSearch();
     /** 상태 값 */
-    const user = useAtomValue(userAtom); // read
+    const user = useAtomValue(userAtom);
     const [searchTerm, setSearchTerm] = useState<string>('');
 
     useEffect(() => {
@@ -53,8 +54,8 @@ function AsideSection() {
                 {/* TODO 목록 UI 하나 */}
                 <div className='flex flex-col mt-4 gap-2'>
                     <small className='text-sm font-medium leading-none text-[#A6A6A6]'>
-                        <span className='text-[#E79057] font-bold'>
-                            {user?.nickname ? user.nickname : '알수없음'}
+                        <span className='text-neutral-700'>
+                            {user?.nickname ? user?.nickname : '알 수 없음님'}
                         </span>
                         의 TODO-BOARD
                     </small>
