@@ -3,8 +3,6 @@
 import { useCreateTask } from '@/hooks/api';
 /** UI 컴포넌트 */
 import { Button } from '@/components/ui';
-import { useEffect } from 'react';
-import { Router } from 'next/router';
 
 function BoardInitPage() {
     /** Add New Page 버튼을 클릭하였을 때, TASK 생성 */
