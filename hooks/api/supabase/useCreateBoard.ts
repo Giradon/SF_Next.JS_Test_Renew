@@ -9,7 +9,6 @@ import { useAtom } from 'jotai';
 function useCreateBoard() {
     const supabase = createClient();
     const [, setTask] = useAtom(taskAtom);
-
     const createBoard = async (
         taskId: number,
         column: string,
